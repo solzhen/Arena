@@ -1,0 +1,297 @@
+openapi: 3.0.3
+info:
+  title: Arena Fighters
+  version: 1.0.0
+  description: A gladiatorial simulator
+paths:
+  /fighters/api/v1/fighters/:
+    get:
+      operationId: v1_fighters_list
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Fighter'
+          description: ''
+    post:
+      operationId: v1_fighters_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fighter'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Fighter'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Fighter'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fighter'
+          description: ''
+  /fighters/api/v1/fighters/{id}/:
+    get:
+      operationId: v1_fighters_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this fighter.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fighter'
+          description: ''
+    put:
+      operationId: v1_fighters_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this fighter.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fighter'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Fighter'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Fighter'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fighter'
+          description: ''
+    patch:
+      operationId: v1_fighters_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this fighter.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFighter'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFighter'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFighter'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fighter'
+          description: ''
+    delete:
+      operationId: v1_fighters_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this fighter.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Fighter:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        clan:
+          type: string
+          maxLength: 200
+        birth:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          title: Year of Birth
+        statSTR:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          title: Strength
+        statDEX:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          title: Dexterity
+        statAGI:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          title: Agility
+        statRES:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          title: Resilience
+        percentHP:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          title: Health
+        percentST:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          title: Stamina
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+      required:
+      - birth
+      - id
+      - name
+    PatchedFighter:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        clan:
+          type: string
+          maxLength: 200
+        birth:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          title: Year of Birth
+        statSTR:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          title: Strength
+        statDEX:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          title: Dexterity
+        statAGI:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          title: Agility
+        statRES:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          title: Resilience
+        percentHP:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          title: Health
+        percentST:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          title: Stamina
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+    StatusEnum:
+      enum:
+      - WR
+      - RT
+      - DE
+      - IN
+      type: string
+      description: |-
+        * `WR` - Working
+        * `RT` - Retired
+        * `DE` - Dead
+        * `IN` - Injured
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
