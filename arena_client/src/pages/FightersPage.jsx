@@ -1,6 +1,6 @@
 import {
-    FightersList
-} from "../components/FightersList"
+    FightersGrid
+} from "../components/FightersGrid"
 export function FightersPage() {
-    return <FightersList />
+    return <FightersGrid />
 }

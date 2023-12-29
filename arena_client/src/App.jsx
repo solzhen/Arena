@@ -18,6 +18,7 @@ function App() {
         <Route path="/fighters" element={<FightersPage />} />
         <Route path="/fighters-create" element={<FighterFormPage />} />
         <Route path="/fighters/:id" element={<FighterFormPage />} />
+        <Route path="/battle" element={<Navigate to="/battle/0/0" />} />
         <Route path="/battle/:id1/:id2" element={<BattlePage />} />
       </Routes>
     </BrowserRouter>
